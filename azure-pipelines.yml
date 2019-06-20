@@ -17,14 +17,19 @@ variables:
 
 steps:
 - task: NuGetToolInstaller@0
+- powershell: git submodule update --init --recursive
+- Import-Module .\tools\OpenConsole.psm1
+- Set-MsBuildDevEnvironment
+- Invoke-OpenConsoleBuild
 
-- task: NuGetCommand@2
-  inputs:
-    restoreSolution: '$(solution)'
 
-- task: VSBuild@1
-  inputs:
-    platform: 'x86'
-    solution: '$(solution)'
-    configuration: '$(buildConfiguration)'
-    msbuildArgs: '/p:AppxBundlePlatforms="$(buildPlatform)" /p:AppxPackageDir="$(appxPackageDir)" /p:AppxBundle=Always /p:UapAppxPackageBuildMode=StoreUpload'
+# - task: NuGetCommand@2
+#   inputs:
+#     restoreSolution: '$(solution)'
+
+# - task: VSBuild@1
+#   inputs:
+#     platform: 'x86'
+#     solution: '$(solution)'
+#     configuration: '$(buildConfiguration)'
+#     msbuildArgs: '/p:AppxBundlePlatforms="$(buildPlatform)" /p:AppxPackageDir="$(appxPackageDir)" /p:AppxBundle=Always /p:UapAppxPackageBuildMode=StoreUpload'
