@@ -18,9 +18,9 @@ variables:
 steps:
 - task: NuGetToolInstaller@0
 - powershell: git submodule update --init --recursive
-- Import-Module .\tools\OpenConsole.psm1
-- Set-MsBuildDevEnvironment
-- Invoke-OpenConsoleBuild
+- powershell: Import-Module .\tools\OpenConsole.psm1
+- powershell: Set-MsBuildDevEnvironment
+- powershell: Invoke-OpenConsoleBuild
 
 
 # - task: NuGetCommand@2
